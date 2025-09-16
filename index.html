@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Her Power Space - Virtual Office Solutions</title>
+    <title>
+      Her Power Space - Virtual Office Solutions in Lauderhill, Florida
+    </title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
       * {
         margin: 0;
@@ -13,622 +19,555 @@
 
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(
-          135deg,
-          #f8fafc 0%,
-          #fff1ec 50%,
-          #fed7aa 100%
-        );
-        color: #374151;
         line-height: 1.6;
-        min-height: 100vh;
+        color: #333;
+        overflow-x: hidden;
       }
 
       .container {
         max-width: 1400px;
         margin: 0 auto;
-        padding: 40px 20px;
+        padding: 0 20px;
       }
 
-      /* Header */
-      .header {
-        text-align: center;
-        margin-bottom: 60px;
+      /* Header Styles */
+      header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        transition: all 0.3s ease;
       }
 
-      .main-title {
-        font-size: 42px;
-        font-weight: bold;
-        background: linear-gradient(
-          135deg,
-          #ea580c 0%,
-          #f97316 50%,
-          #fb923c 100%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 16px;
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
       }
 
-      .main-subtitle {
-        font-size: 20px;
-        color: #9a3412;
-        margin-bottom: 8px;
+      .logo {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #ff6b35;
+        text-shadow: 0 2px 4px rgba(255, 107, 53, 0.2);
+        text-decoration: none;
       }
 
-      .main-description {
-        font-size: 16px;
-        color: #7c2d12;
-        max-width: 600px;
-        margin: 0 auto;
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+        align-items: center;
       }
 
-      /* Page Styles */
-      .page {
+      nav a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      nav a:hover {
+        color: #ff6b35;
+        transform: translateY(-2px);
+      }
+
+      /* Dropdown Styles */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-content {
         display: none;
+        position: absolute;
+        background: white;
+        min-width: 280px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        z-index: 1001;
+        top: 100%;
+        left: 0;
+        border-radius: 10px;
+        padding: 1rem 0;
       }
 
-      .page.active {
+      .dropdown:hover .dropdown-content {
         display: block;
       }
 
-      /* Landing Page - Plan Selection */
-      .plan-selection {
-        display: flex;
-        gap: 30px;
-        justify-content: center;
-        margin-top: 50px;
-        flex-wrap: wrap;
-      }
-
-      .plan-card {
-        background: white;
-        border-radius: 20px;
-        padding: 40px 30px;
-        text-align: center;
-        box-shadow: 0 10px 30px -5px rgba(234, 88, 12, 0.15);
-        transition: all 0.4s ease;
-        position: relative;
-        flex: 1;
-        max-width: 350px;
-        min-width: 300px;
-        border: 2px solid transparent;
-      }
-
-      .plan-card:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 25px 50px -12px rgba(234, 88, 12, 0.3);
-        border-color: #fed7aa;
-      }
-
-      .plan-card.popular {
-        border: 3px solid #f97316;
-        transform: scale(1.05);
-        background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-      }
-
-      .plan-card.popular::before {
-        content: "Most Popular";
-        position: absolute;
-        top: -15px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-        color: white;
-        padding: 8px 24px;
-        border-radius: 25px;
-        font-size: 12px;
-        font-weight: bold;
-        box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
-      }
-
-      .plan-title {
-        font-size: 24px;
-        font-weight: bold;
-        color: #ea580c;
-        margin-bottom: 12px;
-      }
-
-      .plan-description {
-        font-size: 14px;
-        color: #9a3412;
-        margin-bottom: 24px;
-      }
-
-      .plan-features {
-        list-style: none;
-        text-align: left;
-        margin-bottom: 30px;
-      }
-
-      .plan-features li {
-        display: flex;
-        align-items: center;
-        margin-bottom: 12px;
-        font-size: 14px;
-        color: #6b7280;
-      }
-
-      .plan-features li::before {
-        content: "✓";
-        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-        color: white;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 12px;
-        font-size: 12px;
-        font-weight: bold;
-        flex-shrink: 0;
-        box-shadow: 0 2px 8px rgba(234, 88, 12, 0.2);
-      }
-
-      .plan-features li.dash::before {
-        content: "–";
-        background: #9ca3af;
-      }
-
-      .select-plan-btn {
-        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-        color: white;
-        border: none;
-        padding: 16px 32px;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
+      .dropdown-content a {
+        display: block;
+        padding: 12px 20px;
+        border-bottom: 1px solid #f0f0f0;
         transition: all 0.3s ease;
-        width: 100%;
-        box-shadow: 0 4px 15px rgba(234, 88, 12, 0.2);
       }
 
-      .select-plan-btn:hover {
-        background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(234, 88, 12, 0.3);
+      .dropdown-content a:hover {
+        background: rgba(255, 107, 53, 0.1);
+        padding-left: 30px;
       }
 
-      /* Progress Indicator */
-      .progress-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 80px;
-        position: relative;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .progress-step {
-        display: flex;
+      /* Mobile Menu */
+      .mobile-menu {
+        display: none;
         flex-direction: column;
-        align-items: center;
+        cursor: pointer;
+      }
+
+      .mobile-menu span {
+        width: 25px;
+        height: 3px;
+        background: #ff6b35;
+        margin: 3px 0;
+        transition: 0.3s;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          #ff6b35 0%,
+          #f7931e 50%,
+          #ff8c42 100%
+        );
+        color: white;
+        padding: 140px 0 100px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><path d="M0,0 Q500,100 1000,0 L1000,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+        background-size: cover;
+        opacity: 0.3;
+      }
+
+      .hero-content {
         position: relative;
         z-index: 2;
-        flex: 1;
       }
 
-      .step-circle {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 16px;
-        transition: all 0.4s ease;
-        border: 3px solid transparent;
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        font-weight: 800;
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease-out;
       }
 
-      .step-circle.active {
-        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+      .hero .subtitle {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        animation: fadeInUp 1s ease-out 0.2s both;
+      }
+
+      .hero .tagline {
+        font-size: 1.3rem;
+        margin-bottom: 2.5rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        font-weight: 300;
+        line-height: 1.8;
+        animation: fadeInUp 1s ease-out 0.4s both;
+      }
+
+      .btn {
+        display: inline-block;
+        background: #333;
         color: white;
-        box-shadow: 0 6px 20px rgba(234, 88, 12, 0.3);
-      }
-
-      .step-circle.inactive {
-        background-color: #f3f4f6;
-        color: #9ca3af;
-        border-color: #e5e7eb;
-      }
-
-      .step-label {
-        font-size: 16px;
-        color: #9ca3af;
-        text-align: center;
-        font-weight: 500;
-      }
-
-      .step-label.active {
-        color: #ea580c;
+        padding: 15px 40px;
+        text-decoration: none;
+        border-radius: 50px;
         font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
       }
 
-      .progress-line {
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn-hero {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid white;
+        backdrop-filter: blur(10px);
+        animation: fadeInUp 1s ease-out 0.6s both;
+      }
+
+      .btn-hero:hover {
+        background: white;
+        color: #ff6b35;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(135deg, #e55a2e, #e6841a);
+      }
+
+      /* Choose Your Perfect Setup Section */
+      .packages {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.8rem;
+        margin-bottom: 4rem;
+        color: #333;
+        font-weight: 700;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
         position: absolute;
-        top: 35px;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
         height: 4px;
-        background: linear-gradient(90deg, #fed7aa 0%, #f97316 100%);
-        z-index: 1;
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
         border-radius: 2px;
       }
 
-      .progress-line:first-of-type {
-        left: 25%;
-        width: 25%;
+      .packages-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2.5rem;
+        margin-top: 4rem;
       }
 
-      .progress-line:last-of-type {
-        left: 50%;
-        width: 25%;
-      }
-
-      /* Duration Page Layout */
-      .main-layout {
-        display: flex;
-        gap: 40px;
-        align-items: flex-start;
-      }
-
-      .content-area {
-        flex: 2;
+      .package {
         background: white;
-        border-radius: 20px;
-        padding: 40px;
-        box-shadow: 0 10px 30px -5px rgba(234, 88, 12, 0.1);
-        border: 1px solid #fed7aa;
-      }
-
-      .sidebar {
-        flex: 1;
-        background: linear-gradient(
-          135deg,
-          #fff7ed 0%,
-          #ffedd5 50%,
-          #fed7aa 100%
-        );
-        border-radius: 20px;
-        padding: 30px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 10px 30px -5px rgba(234, 88, 12, 0.2);
-        border: 2px solid #f97316;
-      }
-
-      .sidebar::before {
-        content: "";
-        position: absolute;
-        top: -50px;
-        right: -50px;
-        width: 200px;
-        height: 200px;
-        background: rgba(249, 115, 22, 0.1);
-        border-radius: 50%;
-        z-index: 0;
-      }
-
-      .sidebar-content {
-        position: relative;
-        z-index: 1;
-      }
-
-      .page-heading {
-        font-size: 32px;
-        font-weight: bold;
-        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 16px;
-      }
-
-      .page-description {
-        font-size: 16px;
-        color: #7c2d12;
-        margin-bottom: 40px;
-        line-height: 1.7;
-      }
-
-      /* Duration Selection Cards */
-      .duration-cards {
-        display: flex;
-        gap: 24px;
-        align-items: stretch;
-      }
-
-      .duration-card {
-        flex: 1;
-        background: white;
-        border: 2px solid #fed7aa;
-        border-radius: 16px;
-        padding: 32px 24px;
+        border: 3px solid #eee;
+        border-radius: 25px;
+        padding: 3rem 2.5rem;
         text-align: center;
+        position: relative;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .package:hover {
+        transform: translateY(-10px);
+        border-color: #ff6b35;
+        box-shadow: 0 20px 50px rgba(255, 107, 53, 0.2);
+      }
+
+      .package.most-popular {
+        border-color: #ff6b35;
+        transform: scale(1.02);
+        background: linear-gradient(135deg, #ffffff 0%, #fff8f5 100%);
+      }
+
+      .popular-badge {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
+        color: white;
+        padding: 8px 25px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+      }
+
+      .package h3 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+        font-weight: 700;
+      }
+
+      .package .package-type {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 2rem;
+      }
+
+      .package-features {
+        list-style: none;
+        margin: 2.5rem 0;
+        text-align: left;
+      }
+
+      .package-features li {
+        padding: 0.8rem 0;
+        position: relative;
+        padding-left: 2.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .package-features li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #28a745;
+        font-weight: bold;
+        font-size: 1.2rem;
+        top: 0.6rem;
+      }
+
+      /* Everything You Need Section */
+      .services-grid {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      }
+
+      .services-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .service-item {
+        background: white;
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         transition: all 0.4s ease;
         position: relative;
-        cursor: pointer;
+        overflow: hidden;
       }
 
-      .duration-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 15px 35px -8px rgba(234, 88, 12, 0.25);
-        border-color: #f97316;
+      .service-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
       }
 
-      .duration-card.selected {
-        background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-        border-color: #ea580c;
-        transform: scale(1.05);
-        box-shadow: 0 12px 30px -8px rgba(234, 88, 12, 0.3);
+      .service-icon {
+        font-size: 3rem;
+        color: #ff6b35;
+        margin-bottom: 1.5rem;
       }
 
-      .card-title {
-        font-size: 18px;
-        font-weight: 700;
-        color: #f97316;
-        margin-bottom: 8px;
-      }
-
-      .card-subtitle {
-        font-size: 14px;
-        color: #9a3412;
-        margin-bottom: 20px;
-      }
-
-      .card-price {
-        font-size: 48px;
-        font-weight: 300;
-        color: #9ca3af;
-        margin-bottom: 8px;
-      }
-
-      .selected .card-price {
-        color: #ea580c;
-        font-weight: 400;
-      }
-
-      .price-period {
-        font-size: 16px;
-        color: #9a3412;
-        margin-left: 4px;
-      }
-
-      .upfront-price {
-        font-size: 14px;
-        color: #7c2d12;
-        margin-top: 8px;
-        font-weight: 500;
-      }
-
-      /* Sidebar Order Summary */
-      .sidebar-heading {
-        font-size: 24px;
-        font-weight: bold;
-        color: #ea580c;
-        margin-bottom: 30px;
-      }
-
-      .summary-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid rgba(249, 115, 22, 0.2);
-      }
-
-      .summary-label {
-        font-size: 16px;
-        color: #7c2d12;
-        font-weight: 500;
-      }
-
-      .summary-value {
-        font-size: 16px;
-        color: #ea580c;
+      .service-item h4 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: #333;
         font-weight: 600;
       }
 
-      .features-list {
-        list-style: none;
+      .service-item p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
       }
 
-      .feature-item {
+      /* Payment Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-content {
+        background: white;
+        margin: 2% auto;
+        padding: 0;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 800px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        animation: slideIn 0.3s ease-out;
+      }
+
+      .modal-header {
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .modal-body {
+        padding: 2rem;
+      }
+
+      .payment-plans {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .payment-plan {
+        border: 2px solid #eee;
+        border-radius: 15px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .payment-plan:hover {
+        border-color: #ff6b35;
+        transform: scale(1.05);
+      }
+
+      .payment-plan.selected {
+        border-color: #ff6b35;
+        background: rgba(255, 107, 53, 0.1);
+      }
+
+      .plan-period {
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .plan-price {
+        font-size: 1.5rem;
+        color: #ff6b35;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      .plan-total {
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .close {
+        color: white;
+        float: right;
+        font-size: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .close:hover {
+        opacity: 1;
+      }
+
+      /* Footer */
+      footer {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        padding: 4rem 0 2rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-section h4 {
+        margin-bottom: 1.5rem;
+        color: #ff6b35;
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+
+      .footer-section p,
+      .footer-section a {
+        color: #bdc3c7;
+        text-decoration: none;
+        line-height: 2;
+        transition: color 0.3s ease;
+      }
+
+      .footer-section a:hover {
+        color: #ff6b35;
+      }
+
+      .social-links {
         display: flex;
-        align-items: center;
-        margin-bottom: 16px;
-        font-size: 16px;
-        color: #7c2d12;
+        gap: 1rem;
+        margin-top: 1rem;
       }
 
-      .checkmark {
-        width: 22px;
-        height: 22px;
-        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+      .social-links a {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 12px;
-        flex-shrink: 0;
-        box-shadow: 0 2px 8px rgba(234, 88, 12, 0.2);
-      }
-
-      .checkmark::after {
-        content: "✓";
         color: white;
-        font-size: 12px;
-        font-weight: bold;
-      }
-
-      /* Navigation Buttons */
-      .nav-buttons {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 40px;
-      }
-
-      .nav-btn {
-        padding: 14px 28px;
-        border: 2px solid #f97316;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
+        text-decoration: none;
+        font-size: 1.2rem;
         transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
       }
 
-      .nav-btn.primary {
-        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-        color: white;
-        box-shadow: 0 4px 15px rgba(234, 88, 12, 0.2);
+      .social-links a:hover {
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
       }
 
-      .nav-btn.secondary {
-        background: white;
-        color: #f97316;
+      .copyright {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #556983;
+        color: #95a5a6;
       }
 
-      .nav-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(234, 88, 12, 0.3);
-      }
-
-      .nav-btn.primary:hover {
-        background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
-      }
-
-      .nav-btn.secondary:hover {
-        background: #fff7ed;
-        border-color: #ea580c;
-      }
-
-      .nav-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none;
-      }
-
-      /* Form Styles */
-      .form-section {
-        margin-bottom: 30px;
-      }
-
-      .form-group {
-        margin-bottom: 20px;
-      }
-
-      .form-label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: #7c2d12;
-      }
-
-      .form-input {
-        width: 100%;
-        padding: 12px 16px;
-        border: 2px solid #fed7aa;
-        border-radius: 12px;
-        font-size: 16px;
-        transition: border-color 0.3s ease;
-        background-color: #fefefe;
-      }
-
-      .form-input:focus {
-        outline: none;
-        border-color: #f97316;
-        box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
-      }
-
-      .checkbox-group {
+      .newsletter-form {
         display: flex;
-        align-items: center;
-        margin-bottom: 16px;
+        gap: 0.5rem;
+        margin-top: 1rem;
       }
 
-      .checkbox-group input[type="checkbox"] {
-        margin-right: 12px;
-        transform: scale(1.2);
-        accent-color: #f97316;
+      .newsletter-form input {
+        flex: 1;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 25px;
+        outline: none;
       }
 
-      .form-section h3 {
-        font-size: 20px;
+      .newsletter-form button {
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
         font-weight: 600;
-        margin-bottom: 20px;
-        color: #ea580c;
       }
 
-      /* Responsive Design */
-      @media (max-width: 1024px) {
-        .main-layout {
-          flex-direction: column;
-        }
-
-        .duration-cards {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .duration-card {
-          max-width: 300px;
-          width: 100%;
-        }
-
-        .plan-selection {
-          flex-direction: column;
-          align-items: center;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .container {
-          padding: 20px 10px;
-        }
-
-        .content-area {
-          padding: 24px;
-        }
-
-        .sidebar {
-          padding: 20px;
-        }
-
-        .main-title {
-          font-size: 28px;
-        }
-
-        .page-heading {
-          font-size: 24px;
-        }
-
-        .card-price {
-          font-size: 36px;
-        }
-
-        .progress-container {
-          margin-bottom: 60px;
-        }
-
-        .step-circle {
-          width: 60px;
-          height: 60px;
-          font-size: 20px;
-        }
-
-        .step-label {
-          font-size: 14px;
-        }
-      }
-
-      /* Animation */
+      /* Animations */
       @keyframes fadeInUp {
         from {
           opacity: 0;
@@ -640,54 +579,441 @@
         }
       }
 
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .mobile-menu {
+          display: flex;
+        }
+
+        nav ul {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          flex-direction: column;
+          padding: 2rem;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul.active {
+          display: flex;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero .subtitle {
+          font-size: 1.5rem;
+        }
+
+        .hero .tagline {
+          font-size: 1.1rem;
+        }
+
+        .packages-grid,
+        .services-container {
+          grid-template-columns: 1fr;
+        }
+
+        .package.most-popular {
+          transform: none;
+        }
+
+        .modal-content {
+          width: 95%;
+          margin: 5% auto;
+        }
+
+        .payment-plans {
+          grid-template-columns: 1fr;
+        }
+      }
+      /* Search Bar Styles */
+      .search-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+      }
+
+      .search-input {
+        width: 280px;
+        padding: 10px 45px 10px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        outline: none;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+      }
+
+      .search-input:focus {
+        border-color: #ff6b35;
+        box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        width: 320px;
+      }
+
+      .search-btn {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+      }
+
+      .search-btn:hover {
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+      }
+
+      /* Responsive Design for Search Bar */
+      @media (max-width: 992px) {
+        .search-input {
+          width: 200px;
+        }
+
+        .search-input:focus {
+          width: 220px;
+        }
+
+        nav ul {
+          gap: 1.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .search-container {
+          display: none;
+        }
+      }
+      /* Header Actions Styles */
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-left: 1rem;
+      }
+
+      /* Login Button Styles */
+      .login-section .btn-login {
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+      }
+
+      .login-section .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+      }
+
+      /* User Section Styles */
+      .user-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      /* Notification Icon Styles */
+      .notification-icon {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid #e0e0e0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #666;
+      }
+
+      .notification-icon:hover {
+        border-color: #ff6b35;
+        color: #ff6b35;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #ff4757;
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 700;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid white;
+        animation: pulse 2s infinite;
+      }
+
       @keyframes pulse {
-        0%,
-        100% {
+        0% {
           transform: scale(1);
         }
         50% {
-          transform: scale(1.05);
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
         }
       }
 
-      .duration-card,
-      .plan-card {
-        animation: fadeInUp 0.6s ease forwards;
+      /* User Avatar Styles */
+      .user-avatar {
+        position: relative;
+        cursor: pointer;
       }
 
-      .plan-card:nth-child(1) {
-        animation-delay: 0.1s;
-      }
-      .plan-card:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-      .plan-card:nth-child(3) {
-        animation-delay: 0.3s;
+      .user-avatar img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+        object-fit: cover;
       }
 
-      .plan-card.popular {
-        animation: fadeInUp 0.6s ease forwards, pulse 2s ease-in-out infinite;
-        animation-delay: 0.2s, 1s;
+      .user-avatar:hover img {
+        border-color: #ff6b35;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+      }
+
+      /* User Dropdown Styles */
+      .user-dropdown {
+        display: none;
+        position: absolute;
+        top: 120%;
+        right: 0;
+        background: white;
+        min-width: 200px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        padding: 1rem 0;
+        z-index: 1002;
+        border: 1px solid #e0e0e0;
+      }
+
+      .user-dropdown.show {
+        display: block;
+        animation: dropdownSlideIn 0.3s ease-out;
+      }
+
+      @keyframes dropdownSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .user-dropdown a {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        color: #333;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        gap: 10px;
+      }
+
+      .user-dropdown a:hover {
+        background: rgba(255, 107, 53, 0.1);
+        color: #ff6b35;
+      }
+
+      .user-dropdown hr {
+        border: none;
+        border-top: 1px solid #e0e0e0;
+        margin: 0.5rem 0;
+      }
+
+      .user-dropdown a[href="#logout"] {
+        color: #dc3545;
+      }
+
+      .user-dropdown a[href="#logout"]:hover {
+        background: rgba(220, 53, 69, 0.1);
+        color: #dc3545;
+      }
+
+      /* Responsive Design for Header Actions */
+      @media (max-width: 992px) {
+        .header-actions {
+          gap: 0.5rem;
+        }
+
+        .login-section .btn-login {
+          padding: 6px 15px;
+          font-size: 0.8rem;
+        }
+
+        .notification-icon,
+        .user-avatar img {
+          width: 35px;
+          height: 35px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header-actions {
+          display: none;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <!-- Landing Page - Plan Selection -->
-      <div id="landing-page" class="page active">
-        <div class="header">
-          <h1 class="main-title">Choose your perfect Set Up</h1>
-          <p class="main-description">
-            Select the plan that best fits your business needs
-          </p>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <a href="#" class="logo">Her Power Space</a>
+          <nav>
+            <ul>
+              <li class="dropdown">
+                <a href="#services">Services</a>
+                <div class="dropdown-content">
+                  <a href="#packages">Virtual Office</a>
+                  <a href="#packages">Virtual Mail</a>
+                  <a href="#coworking">Co-working Space</a>
+                  <a href="#private-office">Private Office</a>
+                  <a href="#conference">Conference Room</a>
+                  <a href="#podcast">Podcast/Content Creation Space</a>
+                  <a href="#events">Event Space</a>
+                  <a href="#mail-forwarding">Mail Forwarding</a>
+                  <a href="#scanning">Scanning Service</a>
+                  <a href="#notary">Notary By Appointment</a>
+                  <a href="#registered-agent">Registered Agent</a>
+                </div>
+              </li>
+              <li><a href="#contact">Contact Us</a></li>
+              <li><a href="#find-us">Find Us</a></li>
+              <li><a href="#about">About Us</a></li>
+            </ul>
+          </nav>
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="Search services..."
+              class="search-input"
+              id="searchInput"
+            />
+            <button class="search-btn" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          <div class="header-actions">
+            <div class="login-section">
+              <button class="btn-login" onclick="openLoginModal()">
+                Log In
+              </button>
+            </div>
+            <div class="user-section" style="display: none" id="userSection">
+              <div class="notification-icon" onclick="toggleNotifications()">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+              </div>
+              <div class="user-avatar" onclick="toggleUserMenu()">
+                <img
+                  src="https://via.placeholder.com/40x40/ff6b35/ffffff?text=U"
+                  alt="User Avatar"
+                  id="userAvatarImg"
+                />
+                <div class="user-dropdown" id="userDropdown">
+                  <a href="#profile"><i class="fas fa-user"></i> My Profile</a>
+                  <a href="#settings"><i class="fas fa-cog"></i> Settings</a>
+                  <a href="#billing"
+                    ><i class="fas fa-credit-card"></i> Billing</a
+                  >
+                  <a href="#support"
+                    ><i class="fas fa-life-ring"></i> Support</a
+                  >
+                  <hr />
+                  <a href="#logout" onclick="logout()"
+                    ><i class="fas fa-sign-out-alt"></i> Log Out</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mobile-menu" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Welcome to Her Power Space!</h1>
+          <div class="subtitle">Virtual Office Solutions</div>
+          <p class="tagline">
+            Your #1 Virtual Office Solutions in Lauderhill, Florida starts here.
+            We are your one stop shop for a professional and fundable business
+            that every smart entrepreneur desires.
+          </p>
+          <a href="#packages" class="btn btn-hero">Get Started</a>
+        </div>
+      </div>
+    </section>
 
-        <div class="plan-selection">
-          <!-- START UP Plan -->
-          <div class="plan-card">
-            <h3 class="plan-title">START UP</h3>
-            <p class="plan-description">Business virtual mail box only</p>
-            <ul class="plan-features">
+    <!-- Choose Your Perfect Setup -->
+    <section class="packages" id="packages">
+      <div class="container">
+        <h2 class="section-title">Choose your perfect Set Up.</h2>
+
+        <div class="packages-grid">
+          <!-- Start Up Package -->
+          <div class="package">
+            <h3>START UP</h3>
+            <p class="package-type">Business virtual mail box only</p>
+            <ul class="package-features">
               <li>Real street address</li>
               <li>Unique suite number</li>
               <li>Google My Business listing</li>
@@ -695,16 +1021,20 @@
               <li>Discounted postage for mail forwarding</li>
               <li>Registered Agent (for State compliance)</li>
             </ul>
-            <button class="select-plan-btn" onclick="selectPlan('startup')">
+            <button
+              class="btn btn-primary"
+              onclick="openPaymentModal('startup')"
+            >
               I want this
             </button>
           </div>
 
-          <!-- BOSS UP Plan (Most Popular) -->
-          <div class="plan-card popular">
-            <h3 class="plan-title">BOSS UP</h3>
-            <p class="plan-description">Business Virtual Office</p>
-            <ul class="plan-features">
+          <!-- Boss Up Package (Most Popular) -->
+          <div class="package most-popular">
+            <div class="popular-badge">*Most Popular</div>
+            <h3>BOSS UP</h3>
+            <p class="package-type">Business Virtual Office</p>
+            <ul class="package-features">
               <li>Real street address</li>
               <li>Unique suite number</li>
               <li>Google My Business listing</li>
@@ -718,16 +1048,19 @@
               <li>2 x coworking day pass</li>
               <li>10% off all additional services</li>
             </ul>
-            <button class="select-plan-btn" onclick="selectPlan('bossup')">
+            <button
+              class="btn btn-primary"
+              onclick="openPaymentModal('bossup')"
+            >
               I want this
             </button>
           </div>
 
-          <!-- HIGHER UP Plan -->
-          <div class="plan-card">
-            <h3 class="plan-title">HIGHER UP</h3>
-            <p class="plan-description">Business Virtual Office (Premium)</p>
-            <ul class="plan-features">
+          <!-- Higher Up Package -->
+          <div class="package">
+            <h3>HIGHER UP</h3>
+            <p class="package-type">Business Virtual Office (Premium)</p>
+            <ul class="package-features">
               <li>Real street address</li>
               <li>Unique suite number</li>
               <li>Google My Business listing</li>
@@ -742,346 +1075,189 @@
               <li>Live answering service</li>
               <li>30% off all additional services</li>
             </ul>
-            <button class="select-plan-btn" onclick="selectPlan('higherup')">
+            <button
+              class="btn btn-primary"
+              onclick="openPaymentModal('higherup')"
+            >
               I want this
             </button>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Duration Selection Page -->
-      <div id="duration-page" class="page">
-        <!-- Progress Indicator -->
-        <div class="progress-container">
-          <div class="progress-step">
-            <div class="step-circle active">01</div>
-            <div class="step-label active">Duration</div>
-          </div>
-          <div class="progress-line"></div>
+    <!-- Everything You Need Section -->
+    <section class="services-grid">
+      <div class="container">
+        <h2 class="section-title">
+          Everything you need for a Professional and Fundable Business in One
+          Place
+        </h2>
 
-          <div class="progress-step">
-            <div class="step-circle inactive">02</div>
-            <div class="step-label">Details</div>
-          </div>
-          <div class="progress-line"></div>
-
-          <div class="progress-step">
-            <div class="step-circle inactive">03</div>
-            <div class="step-label">Payment</div>
-          </div>
-        </div>
-
-        <!-- Main Layout -->
-        <div class="main-layout">
-          <!-- Content Area -->
-          <div class="content-area">
-            <h1 class="page-heading">Pick Your Duration</h1>
-            <p class="page-description">
-              Choose from our monthly, 6-month, or yearly options to find the
-              perfect fit for your needs and budget.
+        <div class="services-container">
+          <div class="service-item">
+            <div class="service-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h4>Real Street Address</h4>
+            <p>
+              Keep your home address private and use ours for your business.
             </p>
-
-            <!-- Duration Cards -->
-            <div id="duration-cards-container">
-              <!-- Cards will be populated by JavaScript based on selected plan -->
-            </div>
-
-            <div class="nav-buttons">
-              <button
-                class="nav-btn secondary"
-                onclick="goToPage('landing-page')"
-              >
-                Back
-              </button>
-              <button
-                class="nav-btn primary"
-                onclick="goToPage('details-page')"
-                id="next-btn"
-              >
-                Next
-              </button>
-            </div>
           </div>
-
-          <!-- Sidebar Order Summary -->
-          <div class="sidebar">
-            <div class="sidebar-content">
-              <h2 class="sidebar-heading">Order Summary</h2>
-
-              <div class="summary-row">
-                <span class="summary-label">Location:</span>
-                <span class="summary-value">Lauderhill, FL</span>
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">Plan:</span>
-                <span class="summary-value" id="selected-plan-name"
-                  >START UP</span
-                >
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">Payment Frequency:</span>
-                <span class="summary-value" id="selected-frequency"
-                  >Monthly</span
-                >
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">Next Billing Date:</span>
-                <span class="summary-value" id="next-billing">2025-10-15</span>
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">You pay today:</span>
-                <span class="summary-value" id="pay-today">$49</span>
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">You pay at renewal:</span>
-                <span class="summary-value" id="pay-renewal">$49</span>
-              </div>
-
-              <div id="plan-features-sidebar">
-                <!-- Features will be populated by JavaScript -->
-              </div>
-            </div>
+          <div class="service-item">
+            <div class="service-icon"><i class="fas fa-phone"></i></div>
+            <h4>Business Phone Number</h4>
+            <p>
+              Send and receive client calls without the need for a second phone
+              and sharing your personal number.
+            </p>
+          </div>
+          <div class="service-item">
+            <div class="service-icon"><i class="fas fa-building"></i></div>
+            <h4>Virtual Office</h4>
+            <p>
+              Set up a professional office without the overhead of a brick &
+              mortar.
+            </p>
+          </div>
+          <div class="service-item">
+            <div class="service-icon"><i class="fas fa-users"></i></div>
+            <h4>Co-working Space</h4>
+            <p>Co-work solo or in teams in a focus driven setting.</p>
+          </div>
+          <div class="service-item">
+            <div class="service-icon"><i class="fas fa-calendar-alt"></i></div>
+            <h4>Event Space</h4>
+            <p>Host your Networking, product launch, workshops and more.</p>
+          </div>
+          <div class="service-item">
+            <div class="service-icon"><i class="fab fa-google"></i></div>
+            <h4>Google My Business Listing</h4>
+            <p>Concierge listing done for you.</p>
+          </div>
+          <div class="service-item">
+            <div class="service-icon"><i class="fas fa-headset"></i></div>
+            <h4>Live Answering Service</h4>
+            <p>Professional agents routing client calls.</p>
+          </div>
+          <div class="service-item">
+            <div class="service-icon"><i class="fas fa-door-open"></i></div>
+            <h4>Private Office</h4>
+            <p>Meet your clients in an office not a coffee shop.</p>
+          </div>
+          <div class="service-item">
+            <div class="service-icon"><i class="fas fa-handshake"></i></div>
+            <h4>Conference Room</h4>
+            <p>Team work like a Fortune 500 for far less.</p>
+          </div>
+          <div class="service-item">
+            <div class="service-icon"><i class="fas fa-stamp"></i></div>
+            <h4>Notary</h4>
+            <p>Concierge access by appointment.</p>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Details Page -->
-      <div id="details-page" class="page">
-        <div class="progress-container">
-          <div class="progress-step">
-            <div class="step-circle active">01</div>
-            <div class="step-label active">Duration</div>
-          </div>
-          <div class="progress-line"></div>
-
-          <div class="progress-step">
-            <div class="step-circle active">02</div>
-            <div class="step-label active">Details</div>
-          </div>
-          <div class="progress-line"></div>
-
-          <div class="progress-step">
-            <div class="step-circle inactive">03</div>
-            <div class="step-label">Payment</div>
-          </div>
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close" onclick="closePaymentModal()">&times;</span>
+          <h2 id="modalTitle">Choose Your Payment Plan</h2>
+          <p id="modalPackage">Package Name</p>
         </div>
-
-        <div class="main-layout">
-          <div class="content-area">
-            <h1 class="page-heading">Contact Information</h1>
-            <p class="page-description">
-              Please provide your contact details to complete your order.
+        <div class="modal-body">
+          <div id="modalFeatures"></div>
+          <div class="payment-plans" id="paymentPlans">
+            <!-- Payment plans will be populated by JavaScript -->
+          </div>
+          <div style="text-align: center; margin-top: 2rem">
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem">
+              <input
+                type="checkbox"
+                id="notaryService"
+                style="margin-right: 0.5rem"
+              />
+              I need to use the notary at Her Power Space for my USPS 1583 form
+              - additional $10
             </p>
-
-            <form id="contact-form">
-              <div class="form-section">
-                <h3>Personal Information</h3>
-                <div class="form-group">
-                  <label class="form-label">First Name *</label>
-                  <input type="text" class="form-input" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Last Name *</label>
-                  <input type="text" class="form-input" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Email Address *</label>
-                  <input type="email" class="form-input" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Phone Number *</label>
-                  <input type="tel" class="form-input" required />
-                </div>
-              </div>
-
-              <div class="form-section">
-                <h3>Business Information</h3>
-                <div class="form-group">
-                  <label class="form-label">Business Name</label>
-                  <input type="text" class="form-input" />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Business Address</label>
-                  <input type="text" class="form-input" />
-                </div>
-              </div>
-            </form>
-
-            <div class="nav-buttons">
-              <button
-                class="nav-btn secondary"
-                onclick="goToPage('duration-page')"
-              >
-                Back
-              </button>
-              <button class="nav-btn primary" onclick="goToPaymentPage()">
-                Next
-              </button>
-            </div>
-          </div>
-
-          <div class="sidebar">
-            <div class="sidebar-content">
-              <h2 class="sidebar-heading">Order Summary</h2>
-
-              <div class="summary-row">
-                <span class="summary-label">Location:</span>
-                <span class="summary-value">Lauderhill, FL</span>
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">Plan:</span>
-                <span class="summary-value" id="selected-plan-name-details"
-                  >START UP</span
-                >
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">Payment Frequency:</span>
-                <span class="summary-value" id="selected-frequency-details"
-                  >Monthly</span
-                >
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">You pay today:</span>
-                <span class="summary-value" id="pay-today-details">$49</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Payment Page -->
-      <div id="payment-page" class="page">
-        <div class="progress-container">
-          <div class="progress-step">
-            <div class="step-circle active">01</div>
-            <div class="step-label active">Duration</div>
-          </div>
-          <div class="progress-line"></div>
-
-          <div class="progress-step">
-            <div class="step-circle active">02</div>
-            <div class="step-label active">Details</div>
-          </div>
-          <div class="progress-line"></div>
-
-          <div class="progress-step">
-            <div class="step-circle active">03</div>
-            <div class="step-label active">Payment</div>
-          </div>
-        </div>
-
-        <div class="main-layout">
-          <div class="content-area">
-            <h1 class="page-heading">Payment Information</h1>
-            <p class="page-description">
-              Complete your order by providing payment details.
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem">
+              <input
+                type="checkbox"
+                id="agreeTerms"
+                style="margin-right: 0.5rem"
+              />
+              I agree with the fees and the
+              <a href="#terms" style="color: #ff6b35">Terms & Conditions</a>
             </p>
-
-            <form id="payment-form">
-              <div class="form-section">
-                <div class="checkbox-group">
-                  <input type="checkbox" id="terms-agreement" required />
-                  <label for="terms-agreement"
-                    >I agree with the fees and the Terms & Conditions</label
-                  >
-                </div>
-              </div>
-            </form>
-
-            <div class="nav-buttons">
-              <button
-                class="nav-btn secondary"
-                onclick="goToPage('details-page')"
-              >
-                Back
-              </button>
-              <button
-                class="nav-btn primary"
-                onclick="processPayment()"
-                id="pay-now-btn"
-              >
-                PAY NOW
-              </button>
-            </div>
-          </div>
-
-          <div class="sidebar">
-            <div class="sidebar-content">
-              <h2 class="sidebar-heading">Order Summary</h2>
-
-              <div class="summary-row">
-                <span class="summary-label">Location:</span>
-                <span class="summary-value">Lauderhill, FL</span>
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">Plan:</span>
-                <span class="summary-value" id="selected-plan-name-payment"
-                  >START UP</span
-                >
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">Payment Frequency:</span>
-                <span class="summary-value" id="selected-frequency-payment"
-                  >Monthly</span
-                >
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">Next Billing Date:</span>
-                <span class="summary-value" id="next-billing-payment"
-                  >2025-10-15</span
-                >
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">You pay today:</span>
-                <span class="summary-value" id="pay-today-payment">$49</span>
-              </div>
-
-              <div class="summary-row">
-                <span class="summary-label">You pay at renewal:</span>
-                <span class="summary-value" id="pay-renewal-payment">$49</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Footer -->
+    <footer id="contact">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4>Contact Information</h4>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> 4300 N. University Drive,
+              Suite F-100<br />Lauderhill, FL 33351
+            </p>
+            <p><i class="fas fa-phone"></i> 754-210-9861</p>
+            <p><i class="fas fa-envelope"></i> team@herpowerspace.com</p>
+          </div>
+          <div class="footer-section">
+            <h4>Business Hours</h4>
+            <p><i class="fas fa-clock"></i> Monday - Friday: 9 AM - 5 PM</p>
+            <p>
+              <i class="fas fa-calendar-alt"></i> Weekend hours available by
+              appointment
+            </p>
+          </div>
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <p><a href="#terms">Terms & Conditions</a></p>
+            <p><a href="#privacy">Privacy Policy</a></p>
+            <p><a href="#contact">Contact Us</a></p>
+            <p><a href="#faq">FAQ</a></p>
+          </div>
+          <div class="footer-section">
+            <h4>Follow Us & Newsletter</h4>
+            <div class="social-links">
+              <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a
+                href="https://www.linkedin.com/company/her-power-moves/?viewAsMember=true"
+                title="LinkedIn"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <div class="newsletter-form">
+              <input
+                type="email"
+                placeholder="Your email address"
+                id="newsletterEmail"
+              />
+              <button onclick="subscribeNewsletter()">Subscribe</button>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>Her Power Space © 2022-2025 All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
     <script>
-      // Application state
-      let currentPlan = "startup";
-      let currentDuration = "monthly";
-      let planData = {
+      // Package pricing data
+      const packagePricing = {
         startup: {
           name: "START UP",
           description: "Business virtual mail box only",
-          pricing: {
-            monthly: {
-              price: 49,
-              link: "https://buy.stripe.com/00wcN72Sqe0edatcB27N60K",
-            },
-            "6month": {
-              price: 39,
-              upfront: 234,
-              link: "https://buy.stripe.com/7sY3cxgJg5tIfiBdF67N60N",
-            },
-            "12month": {
-              price: 29,
-              upfront: 348,
-              link: "https://buy.stripe.com/8x24gB64C7BQ7Q97gI7N60M",
-            },
-          },
           features: [
             "Real street address",
             "Unique suite number",
@@ -1089,27 +1265,31 @@
             "Bing for Business listing",
             "Discounted postage for mail forwarding",
             "Registered Agent (for State compliance)",
+          ],
+          plans: [
+            {
+              period: "Monthly",
+              price: "$49",
+              total: "per month",
+              link: "https://buy.stripe.com/00wcN72Sqe0edatcB27N60K",
+            },
+            {
+              period: "6-month",
+              price: "$39",
+              total: "Pay $234 upfront",
+              link: "https://buy.stripe.com/7sY3cxgJg5tIfiBdF67N60N",
+            },
+            {
+              period: "12-month",
+              price: "$29",
+              total: "Pay $348 upfront",
+              link: "https://buy.stripe.com/8x24gB64C7BQ7Q97gI7N60M",
+            },
           ],
         },
         bossup: {
           name: "BOSS UP",
           description: "Business Virtual Office",
-          pricing: {
-            monthly: {
-              price: 69,
-              link: "https://buy.stripe.com/28EdRb2Sq7BQ8Ud44w7N60O",
-            },
-            "6month": {
-              price: 59,
-              upfront: 354,
-              link: "https://buy.stripe.com/8x200l50yf4ifiB0Sk7N60P",
-            },
-            "12month": {
-              price: 49,
-              upfront: 588,
-              link: "https://buy.stripe.com/5kQ5kF78Gg8m0nHfNe7N60Q",
-            },
-          },
           features: [
             "Real street address",
             "Unique suite number",
@@ -1117,33 +1297,35 @@
             "Bing for Business listing",
             "Discounted postage for mail forwarding",
             "Registered Agent (for State compliance)",
-            "Shredding",
-            "Free scans (first 10 pages) per month",
             "Business phone number",
             "1 hour private office access",
             "2 x coworking day pass",
             "10% off all additional services",
           ],
+          plans: [
+            {
+              period: "Monthly",
+              price: "$69",
+              total: "per month",
+              link: "https://buy.stripe.com/28EdRb2Sq7BQ8Ud44w7N60O",
+            },
+            {
+              period: "6-month",
+              price: "$59",
+              total: "Pay $354 upfront",
+              link: "https://buy.stripe.com/8x200l50yf4ifiB0Sk7N60P",
+            },
+            {
+              period: "12-month",
+              price: "$49",
+              total: "Pay $588 upfront",
+              link: "https://buy.stripe.com/5kQ5kF78Gg8m0nHfNe7N60Q",
+            },
+          ],
         },
         higherup: {
           name: "HIGHER UP",
           description: "Business Virtual Office (Premium)",
-          pricing: {
-            monthly: {
-              price: 79,
-              link: "https://buy.stripe.com/fZu7sNgJge0eeex9oQ7N60R",
-            },
-            "6month": {
-              price: 69,
-              upfront: 414,
-              link: "https://buy.stripe.com/5kQ3cx0Ki7BQ7Q90Sk7N60S",
-            },
-            "12month": {
-              price: 59,
-              upfront: 708,
-              link: "https://buy.stripe.com/8x200l9gO8FUfiB9oQ7N60T",
-            },
-          },
           features: [
             "Real street address",
             "Unique suite number",
@@ -1151,216 +1333,449 @@
             "Bing for Business listing",
             "Discounted postage for mail forwarding",
             "Registered Agent (for State compliance)",
-            "Shredding",
-            "Unlimited scans",
             "Business phone number",
             "2 hour private office access",
             "4 x coworking day pass",
             "Live answering service",
             "30% off all additional services",
           ],
+          plans: [
+            {
+              period: "Monthly",
+              price: "$79",
+              total: "per month",
+              link: "https://buy.stripe.com/fZu7sNgJge0eeex9oQ7N60R",
+            },
+            {
+              period: "6-month",
+              price: "$69",
+              total: "Pay $414 upfront",
+              link: "https://buy.stripe.com/5kQ3cx0Ki7BQ7Q90Sk7N60S",
+            },
+            {
+              period: "12-month",
+              price: "$59",
+              total: "Pay $708 upfront",
+              link: "https://buy.stripe.com/8x200l9gO8FUfiB9oQ7N60T",
+            },
+          ],
         },
       };
 
-      // Helper functions
-      function formatDate(daysFromNow) {
-        const date = new Date();
-        date.setDate(date.getDate() + daysFromNow);
-        return date.toISOString().split("T")[0];
+      let selectedPlan = null;
+
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const nav = document.querySelector("nav ul");
+        nav.classList.toggle("active");
       }
 
-      function updateOrderSummary() {
-        const plan = planData[currentPlan];
-        const pricing = plan.pricing[currentDuration];
+      // Open payment modal
+      function openPaymentModal(packageType) {
+        const modal = document.getElementById("paymentModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalPackage = document.getElementById("modalPackage");
+        const modalFeatures = document.getElementById("modalFeatures");
+        const paymentPlans = document.getElementById("paymentPlans");
 
-        // Update plan name
-        document
-          .querySelectorAll('[id^="selected-plan-name"]')
-          .forEach((el) => {
-            el.textContent = plan.name;
-          });
+        const packageData = packagePricing[packageType];
 
-        // Update frequency
-        const frequencyText = {
-          monthly: "Monthly",
-          "6month": "6 Months",
-          "12month": "12 Months",
-        };
+        modalTitle.textContent = "Choose Your Payment Plan";
+        modalPackage.textContent = `${packageData.name} - ${packageData.description}`;
 
-        document
-          .querySelectorAll('[id^="selected-frequency"]')
-          .forEach((el) => {
-            el.textContent = frequencyText[currentDuration];
-          });
-
-        // Update billing dates and amounts
-        const nextBillingDays = {
-          monthly: 30,
-          "6month": 180,
-          "12month": 365,
-        };
-
-        const nextBilling = formatDate(nextBillingDays[currentDuration]);
-        document.querySelectorAll('[id^="next-billing"]').forEach((el) => {
-          el.textContent = nextBilling;
+        // Populate features
+        let featuresHTML = '<ul style="list-style: none; margin: 1rem 0;">';
+        packageData.features.forEach((feature) => {
+          featuresHTML += `<li style="padding: 0.3rem 0; position: relative; padding-left: 1.5rem;">
+                    <span style="position: absolute; left: 0; color: #28a745; font-weight: bold;">✓</span>
+                    ${feature}
+                </li>`;
         });
+        featuresHTML += "</ul>";
+        modalFeatures.innerHTML = featuresHTML;
 
-        // Update payment amounts
-        const payToday = pricing.upfront || pricing.price;
-        document.querySelectorAll('[id^="pay-today"]').forEach((el) => {
-          el.textContent = `${payToday}`;
-        });
-
-        document.querySelectorAll('[id^="pay-renewal"]').forEach((el) => {
-          el.textContent = `${pricing.price}`;
-        });
-
-        // Update features in sidebar
-        const featuresContainer = document.getElementById(
-          "plan-features-sidebar"
-        );
-        if (featuresContainer) {
-          featuresContainer.innerHTML = `
-                    <ul class="features-list">
-                        ${plan.features
-                          .map(
-                            (feature) => `
-                            <li class="feature-item">
-                                <div class="checkmark"></div>
-                                ${feature}
-                            </li>
-                        `
-                          )
-                          .join("")}
-                    </ul>
+        // Populate payment plans
+        let plansHTML = "";
+        packageData.plans.forEach((plan, index) => {
+          plansHTML += `
+                    <div class="payment-plan" onclick="selectPlan('${packageType}', ${index})">
+                        <div class="plan-period">${plan.period}</div>
+                        <div class="plan-price">${plan.price}</div>
+                        <div class="plan-total">${plan.total}</div>
+                    </div>
                 `;
-        }
-      }
-
-      function selectPlan(planType) {
-        currentPlan = planType;
-        goToPage("duration-page");
-        renderDurationCards();
-        updateOrderSummary();
-      }
-
-      function renderDurationCards() {
-        const plan = planData[currentPlan];
-        const container = document.getElementById("duration-cards-container");
-
-        container.innerHTML = `
-                <div class="duration-cards">
-                    <div class="duration-card" onclick="selectDuration('monthly')">
-                        <div class="card-title">Monthly</div>
-                        <div class="card-subtitle">Starting</div>
-                        <div class="card-price">
-                            ${plan.pricing.monthly.price}.00<span class="price-period">/Month</span>
-                        </div>
-                    </div>
-
-                    <div class="duration-card selected" onclick="selectDuration('6month')">
-                        <div class="card-title">6-month</div>
-                        <div class="card-subtitle">Starting</div>
-                        <div class="card-price">
-                            ${plan.pricing["6month"].price}.00<span class="price-period">/Month</span>
-                        </div>
-                        <div class="upfront-price">Pay ${plan.pricing["6month"].upfront} upfront</div>
-                    </div>
-
-                    <div class="duration-card" onclick="selectDuration('12month')">
-                        <div class="card-title">12-month</div>
-                        <div class="card-subtitle">Starting</div>
-                        <div class="card-price">
-                            ${plan.pricing["12month"].price}.00<span class="price-period">/Month</span>
-                        </div>
-                        <div class="upfront-price">Pay ${plan.pricing["12month"].upfront} upfront</div>
-                    </div>
-                </div>
-            `;
-
-        // Set default selection to 6-month
-        currentDuration = "6month";
-      }
-
-      function selectDuration(duration) {
-        currentDuration = duration;
-
-        // Update visual selection
-        document.querySelectorAll(".duration-card").forEach((card) => {
-          card.classList.remove("selected");
         });
-        event.currentTarget.classList.add("selected");
+        paymentPlans.innerHTML = plansHTML;
 
-        updateOrderSummary();
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
       }
 
-      function goToPage(pageId) {
-        // Hide all pages
-        document.querySelectorAll(".page").forEach((page) => {
-          page.classList.remove("active");
+      // Close payment modal
+      function closePaymentModal() {
+        const modal = document.getElementById("paymentModal");
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+        selectedPlan = null;
+
+        // Reset checkboxes
+        document.getElementById("notaryService").checked = false;
+        document.getElementById("agreeTerms").checked = false;
+      }
+
+      // Select payment plan
+      function selectPlan(packageType, planIndex) {
+        // Remove previous selection
+        document.querySelectorAll(".payment-plan").forEach((plan) => {
+          plan.classList.remove("selected");
         });
 
-        // Show target page
-        document.getElementById(pageId).classList.add("active");
+        // Add selection to clicked plan
+        document
+          .querySelectorAll(".payment-plan")
+          [planIndex].classList.add("selected");
 
-        // Update order summary when navigating
-        if (pageId !== "landing-page") {
-          updateOrderSummary();
+        selectedPlan = {
+          package: packageType,
+          planIndex: planIndex,
+          data: packagePricing[packageType].plans[planIndex],
+        };
+
+        // Show checkout button
+        let checkoutBtn = document.getElementById("checkoutBtn");
+        if (!checkoutBtn) {
+          checkoutBtn = document.createElement("button");
+          checkoutBtn.id = "checkoutBtn";
+          checkoutBtn.className = "btn btn-primary";
+          checkoutBtn.style.cssText =
+            "margin-top: 2rem; width: 100%; padding: 15px;";
+          checkoutBtn.onclick = proceedToCheckout;
+          document.querySelector(".modal-body").appendChild(checkoutBtn);
         }
+        checkoutBtn.textContent = "Get Started - " + selectedPlan.data.price;
+        checkoutBtn.style.display = "block";
       }
 
-      function processPayment() {
-        const termsCheckbox = document.getElementById("terms-agreement");
-
-        if (!termsCheckbox.checked) {
-          alert("Please agree to the Terms & Conditions to proceed.");
+      // Proceed to checkout
+      function proceedToCheckout() {
+        if (!selectedPlan) {
+          alert("Please select a payment plan");
           return;
         }
 
-        // Get the current plan pricing and payment link
-        const plan = planData[currentPlan];
-        const pricing = plan.pricing[currentDuration];
-
-        // Calculate final amount (no notary service charge)
-        let totalAmount = pricing.upfront || pricing.price;
-
-        // In a real implementation, you would redirect to the Stripe payment link
-        if (confirm(`Proceed to payment of ${totalAmount}?`)) {
-          // Redirect to appropriate Stripe payment link
-          window.open(pricing.link, "_blank");
+        const agreeTerms = document.getElementById("agreeTerms").checked;
+        if (!agreeTerms) {
+          alert("Please agree to the Terms & Conditions to proceed");
+          return;
         }
+
+        // Redirect to Stripe payment link
+        window.open(selectedPlan.data.link, "_blank");
       }
 
-      // Form validation
-      function validateForm(formId) {
-        const form = document.getElementById(formId);
-        const requiredFields = form.querySelectorAll("input[required]");
+      // Newsletter subscription
+      function subscribeNewsletter() {
+        const email = document.getElementById("newsletterEmail").value;
+        if (!email || !email.includes("@")) {
+          alert("Please enter a valid email address");
+          return;
+        }
 
-        for (let field of requiredFields) {
-          if (!field.value.trim()) {
-            field.focus();
-            alert("Please fill in all required fields.");
-            return false;
+        // Here you would typically send to your email service
+        alert("Thank you for subscribing to our newsletter!");
+        document.getElementById("newsletterEmail").value = "";
+      }
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
           }
-        }
-        return true;
-      }
-
-      // Enhanced navigation with validation
-      function goToDetailsPage() {
-        goToPage("details-page");
-      }
-
-      function goToPaymentPage() {
-        if (validateForm("contact-form")) {
-          goToPage("payment-page");
-        }
-      }
-
-      // Initialize the application
-      document.addEventListener("DOMContentLoaded", function () {
-        // Application is ready
+        });
       });
+
+      // Header scroll effect
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector("header");
+        if (window.scrollY > 100) {
+          header.style.background = "rgba(255, 255, 255, 0.98)";
+          header.style.boxShadow = "0 2px 30px rgba(0,0,0,0.15)";
+        } else {
+          header.style.background = "rgba(255, 255, 255, 0.95)";
+          header.style.boxShadow = "0 2px 20px rgba(0,0,0,0.1)";
+        }
+      });
+
+      // Close modal when clicking outside
+      window.onclick = function (event) {
+        const modal = document.getElementById("paymentModal");
+        if (event.target === modal) {
+          closePaymentModal();
+        }
+      };
+
+      // Service item interactions
+      document.querySelectorAll(".service-item").forEach((item) => {
+        item.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px) scale(1.02)";
+        });
+
+        item.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+        });
+      });
+
+      // Package hover effects
+      document.querySelectorAll(".package").forEach((package) => {
+        package.addEventListener("mouseenter", function () {
+          if (!this.classList.contains("most-popular")) {
+            this.style.transform = "translateY(-10px) scale(1.02)";
+          }
+          this.style.boxShadow = "0 25px 60px rgba(255, 107, 53, 0.25)";
+        });
+
+        package.addEventListener("mouseleave", function () {
+          if (this.classList.contains("most-popular")) {
+            this.style.transform = "scale(1.02)";
+          } else {
+            this.style.transform = "translateY(0) scale(1)";
+          }
+          this.style.boxShadow = this.classList.contains("most-popular")
+            ? "0 20px 50px rgba(255,107,53,0.2)"
+            : "0 10px 30px rgba(0,0,0,0.1)";
+        });
+      });
+
+      // Initialize page
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("Enhanced Her Power Space website loaded successfully");
+
+        // Add stagger animation to packages
+        const packages = document.querySelectorAll(".package");
+        packages.forEach((pkg, index) => {
+          pkg.style.animationDelay = `${index * 0.2}s`;
+          pkg.classList.add("fade-in-up");
+        });
+
+        // Add floating animation to hero elements
+        const heroElements = document.querySelectorAll(
+          ".hero h1, .hero .subtitle, .hero p, .hero .btn"
+        );
+        heroElements.forEach((element, index) => {
+          element.style.animation = `fadeInUp 1s ease-out ${index * 0.2}s both`;
+        });
+
+        // Add scroll animations to service items
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.animation = "fadeInUp 0.8s ease-out forwards";
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        document.querySelectorAll(".service-item").forEach((item, index) => {
+          item.style.opacity = "0";
+          item.style.animationDelay = `${index * 0.1}s`;
+          observer.observe(item);
+        });
+      });
+
+      // Additional Services Functions (for future implementation)
+
+      // Registered Agent Service
+      function openRegisteredAgent() {
+        window.open("https://buy.stripe.com/bJeaEZ8cK7BQ8Ud7gI7N60U", "_blank");
+      }
+
+      // Notary Service
+      function openNotaryService() {
+        window.open("https://buy.stripe.com/4gM8wRdx4cWa7Q9dF67N60V", "_blank");
+      }
+
+      // Contact Form Handler
+      function handleContactForm(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+
+        // Here you would typically send the form data to your server
+        alert("Thank you for your message! We will get back to you soon.");
+        event.target.reset();
+      }
+
+      // Performance monitoring
+      window.addEventListener("load", function () {
+        const loadTime = performance.now();
+        console.log(`Page loaded in ${Math.round(loadTime)}ms`);
+      });
+
+      // Add CSS for fade-in-up animation
+      const style = document.createElement("style");
+      style.textContent = `
+            .fade-in-up {
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+            
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .payment-plan:hover {
+                box-shadow: 0 8px 25px rgba(255, 107, 53, 0.2);
+            }
+            
+            .payment-plan.selected {
+                background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(247, 147, 30, 0.1));
+                box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            }
+            
+            @media (max-width: 768px) {
+                .dropdown-content {
+                    position: static;
+                    display: block;
+                    box-shadow: none;
+                    background: #f8f9fa;
+                    margin-top: 0.5rem;
+                    border-radius: 0;
+                }
+                
+                .dropdown-content a {
+                    padding: 10px 15px;
+                }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Login Modal Functions
+      function openLoginModal() {
+        const loginModal = document.getElementById("loginModal");
+        if (!loginModal) {
+          createLoginModal();
+        }
+        document.getElementById("loginModal").style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLoginModal() {
+        document.getElementById("loginModal").style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      function createLoginModal() {
+        const modalHTML = `
+    <div id="loginModal" class="modal">
+      <div class="modal-content" style="max-width: 400px;">
+        <div class="modal-header">
+          <span class="close" onclick="closeLoginModal()">&times;</span>
+          <h2>Welcome Back</h2>
+          <p>Sign in to your account</p>
+        </div>
+        <div class="modal-body">
+          <form onsubmit="handleLogin(event)">
+            <div style="margin-bottom: 1rem;">
+              <input type="email" placeholder="Email address" required 
+                     style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; outline: none;">
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <input type="password" placeholder="Password" required 
+                     style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; outline: none;">
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.9rem;">
+              <label><input type="checkbox"> Remember me</label>
+              <a href="#forgot" style="color: #ff6b35; text-decoration: none;">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Sign In</button>
+            <div style="text-align: center; color: #666;">
+              Don't have an account? <a href="#signup" style="color: #ff6b35; text-decoration: none; font-weight: 600;">Sign up</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+        document.body.insertAdjacentHTML("beforeend", modalHTML);
+      }
+
+      function handleLogin(event) {
+        event.preventDefault();
+        // Simulate successful login
+        closeLoginModal();
+        simulateUserLogin();
+      }
+
+      function simulateUserLogin() {
+        document.querySelector(".login-section").style.display = "none";
+        document.getElementById("userSection").style.display = "flex";
+
+        // You can customize the avatar here
+        document.getElementById("userAvatarImg").src =
+          "https://via.placeholder.com/40x40/ff6b35/ffffff?text=JD";
+        document.getElementById("userAvatarImg").alt = "John Doe";
+      }
+
+      function logout() {
+        document.querySelector(".login-section").style.display = "block";
+        document.getElementById("userSection").style.display = "none";
+        document.getElementById("userDropdown").classList.remove("show");
+      }
+
+      function toggleUserMenu() {
+        const dropdown = document.getElementById("userDropdown");
+        dropdown.classList.toggle("show");
+      }
+
+      function toggleNotifications() {
+        // Simulate notification toggle
+        const badge = document.querySelector(".notification-badge");
+        if (badge.textContent === "3") {
+          badge.textContent = "0";
+          badge.style.display = "none";
+        } else {
+          badge.textContent = "3";
+          badge.style.display = "flex";
+        }
+      }
+
+      // Close dropdowns when clicking outside
+      document.addEventListener("click", function (event) {
+        const userDropdown = document.getElementById("userDropdown");
+        const userAvatar = document.querySelector(".user-avatar");
+
+        if (userDropdown && !userAvatar.contains(event.target)) {
+          userDropdown.classList.remove("show");
+        }
+      });
+
+      // Updated window click handler to include login modal
+      window.onclick = function (event) {
+        const modal = document.getElementById("paymentModal");
+        const loginModal = document.getElementById("loginModal");
+        if (event.target === modal) {
+          closePaymentModal();
+        }
+        if (event.target === loginModal) {
+          closeLoginModal();
+        }
+      };
     </script>
   </body>
 </html>
