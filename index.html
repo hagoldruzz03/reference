@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Her Power Space - Virtual Office Solutions</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #f8fafc 0%,
+          #fff1ec 50%,
+          #fed7aa 100%
+        );
+        color: #374151;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .main-title {
+        font-size: 42px;
+        font-weight: bold;
+        background: linear-gradient(
+          135deg,
+          #ea580c 0%,
+          #f97316 50%,
+          #fb923c 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 16px;
+      }
+
+      .main-subtitle {
+        font-size: 20px;
+        color: #9a3412;
+        margin-bottom: 8px;
+      }
+
+      .main-description {
+        font-size: 16px;
+        color: #7c2d12;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Page Styles */
+      .page {
+        display: none;
+      }
+
+      .page.active {
+        display: block;
+      }
+
+      /* Landing Page - Plan Selection */
+      .plan-selection {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        margin-top: 50px;
+        flex-wrap: wrap;
+      }
+
+      .plan-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 10px 30px -5px rgba(234, 88, 12, 0.15);
+        transition: all 0.4s ease;
+        position: relative;
+        flex: 1;
+        max-width: 350px;
+        min-width: 300px;
+        border: 2px solid transparent;
+      }
+
+      .plan-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 25px 50px -12px rgba(234, 88, 12, 0.3);
+        border-color: #fed7aa;
+      }
+
+      .plan-card.popular {
+        border: 3px solid #f97316;
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      }
+
+      .plan-card.popular::before {
+        content: "Most Popular";
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+        color: white;
+        padding: 8px 24px;
+        border-radius: 25px;
+        font-size: 12px;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
+      }
+
+      .plan-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ea580c;
+        margin-bottom: 12px;
+      }
+
+      .plan-description {
+        font-size: 14px;
+        color: #9a3412;
+        margin-bottom: 24px;
+      }
+
+      .plan-features {
+        list-style: none;
+        text-align: left;
+        margin-bottom: 30px;
+      }
+
+      .plan-features li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .plan-features li::before {
+        content: "✓";
+        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        font-size: 12px;
+        font-weight: bold;
+        flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(234, 88, 12, 0.2);
+      }
+
+      .plan-features li.dash::before {
+        content: "–";
+        background: #9ca3af;
+      }
+
+      .select-plan-btn {
+        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+        color: white;
+        border: none;
+        padding: 16px 32px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        box-shadow: 0 4px 15px rgba(234, 88, 12, 0.2);
+      }
+
+      .select-plan-btn:hover {
+        background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(234, 88, 12, 0.3);
+      }
+
+      /* Progress Indicator */
+      .progress-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 80px;
+        position: relative;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .progress-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+        flex: 1;
+      }
+
+      .step-circle {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 16px;
+        transition: all 0.4s ease;
+        border: 3px solid transparent;
+      }
+
+      .step-circle.active {
+        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+        color: white;
+        box-shadow: 0 6px 20px rgba(234, 88, 12, 0.3);
+      }
+
+      .step-circle.inactive {
+        background-color: #f3f4f6;
+        color: #9ca3af;
+        border-color: #e5e7eb;
+      }
+
+      .step-label {
+        font-size: 16px;
+        color: #9ca3af;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .step-label.active {
+        color: #ea580c;
+        font-weight: 700;
+      }
+
+      .progress-line {
+        position: absolute;
+        top: 35px;
+        height: 4px;
+        background: linear-gradient(90deg, #fed7aa 0%, #f97316 100%);
+        z-index: 1;
+        border-radius: 2px;
+      }
+
+      .progress-line:first-of-type {
+        left: 25%;
+        width: 25%;
+      }
+
+      .progress-line:last-of-type {
+        left: 50%;
+        width: 25%;
+      }
+
+      /* Duration Page Layout */
+      .main-layout {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+      }
+
+      .content-area {
+        flex: 2;
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 30px -5px rgba(234, 88, 12, 0.1);
+        border: 1px solid #fed7aa;
+      }
+
+      .sidebar {
+        flex: 1;
+        background: linear-gradient(
+          135deg,
+          #fff7ed 0%,
+          #ffedd5 50%,
+          #fed7aa 100%
+        );
+        border-radius: 20px;
+        padding: 30px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px -5px rgba(234, 88, 12, 0.2);
+        border: 2px solid #f97316;
+      }
+
+      .sidebar::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        background: rgba(249, 115, 22, 0.1);
+        border-radius: 50%;
+        z-index: 0;
+      }
+
+      .sidebar-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-heading {
+        font-size: 32px;
+        font-weight: bold;
+        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 16px;
+      }
+
+      .page-description {
+        font-size: 16px;
+        color: #7c2d12;
+        margin-bottom: 40px;
+        line-height: 1.7;
+      }
+
+      /* Duration Selection Cards */
+      .duration-cards {
+        display: flex;
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .duration-card {
+        flex: 1;
+        background: white;
+        border: 2px solid #fed7aa;
+        border-radius: 16px;
+        padding: 32px 24px;
+        text-align: center;
+        transition: all 0.4s ease;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .duration-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 35px -8px rgba(234, 88, 12, 0.25);
+        border-color: #f97316;
+      }
+
+      .duration-card.selected {
+        background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+        border-color: #ea580c;
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px -8px rgba(234, 88, 12, 0.3);
+      }
+
+      .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #f97316;
+        margin-bottom: 8px;
+      }
+
+      .card-subtitle {
+        font-size: 14px;
+        color: #9a3412;
+        margin-bottom: 20px;
+      }
+
+      .card-price {
+        font-size: 48px;
+        font-weight: 300;
+        color: #9ca3af;
+        margin-bottom: 8px;
+      }
+
+      .selected .card-price {
+        color: #ea580c;
+        font-weight: 400;
+      }
+
+      .price-period {
+        font-size: 16px;
+        color: #9a3412;
+        margin-left: 4px;
+      }
+
+      .upfront-price {
+        font-size: 14px;
+        color: #7c2d12;
+        margin-top: 8px;
+        font-weight: 500;
+      }
+
+      /* Sidebar Order Summary */
+      .sidebar-heading {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ea580c;
+        margin-bottom: 30px;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(249, 115, 22, 0.2);
+      }
+
+      .summary-label {
+        font-size: 16px;
+        color: #7c2d12;
+        font-weight: 500;
+      }
+
+      .summary-value {
+        font-size: 16px;
+        color: #ea580c;
+        font-weight: 600;
+      }
+
+      .features-list {
+        list-style: none;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+        font-size: 16px;
+        color: #7c2d12;
+      }
+
+      .checkmark {
+        width: 22px;
+        height: 22px;
+        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(234, 88, 12, 0.2);
+      }
+
+      .checkmark::after {
+        content: "✓";
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      /* Navigation Buttons */
+      .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+      }
+
+      .nav-btn {
+        padding: 14px 28px;
+        border: 2px solid #f97316;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn.primary {
+        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(234, 88, 12, 0.2);
+      }
+
+      .nav-btn.secondary {
+        background: white;
+        color: #f97316;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(234, 88, 12, 0.3);
+      }
+
+      .nav-btn.primary:hover {
+        background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+      }
+
+      .nav-btn.secondary:hover {
+        background: #fff7ed;
+        border-color: #ea580c;
+      }
+
+      .nav-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Form Styles */
+      .form-section {
+        margin-bottom: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #7c2d12;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #fed7aa;
+        border-radius: 12px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+        background-color: #fefefe;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #f97316;
+        box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        margin-right: 12px;
+        transform: scale(1.2);
+        accent-color: #f97316;
+      }
+
+      .form-section h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #ea580c;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .main-layout {
+          flex-direction: column;
+        }
+
+        .duration-cards {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .duration-card {
+          max-width: 300px;
+          width: 100%;
+        }
+
+        .plan-selection {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px 10px;
+        }
+
+        .content-area {
+          padding: 24px;
+        }
+
+        .sidebar {
+          padding: 20px;
+        }
+
+        .main-title {
+          font-size: 28px;
+        }
+
+        .page-heading {
+          font-size: 24px;
+        }
+
+        .card-price {
+          font-size: 36px;
+        }
+
+        .progress-container {
+          margin-bottom: 60px;
+        }
+
+        .step-circle {
+          width: 60px;
+          height: 60px;
+          font-size: 20px;
+        }
+
+        .step-label {
+          font-size: 14px;
+        }
+      }
+
+      /* Animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .duration-card,
+      .plan-card {
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      .plan-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .plan-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .plan-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .plan-card.popular {
+        animation: fadeInUp 0.6s ease forwards, pulse 2s ease-in-out infinite;
+        animation-delay: 0.2s, 1s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Landing Page - Plan Selection -->
+      <div id="landing-page" class="page active">
+        <div class="header">
+          <h1 class="main-title">Choose your perfect Set Up</h1>
+          <p class="main-description">
+            Select the plan that best fits your business needs
+          </p>
+        </div>
+
+        <div class="plan-selection">
+          <!-- START UP Plan -->
+          <div class="plan-card">
+            <h3 class="plan-title">START UP</h3>
+            <p class="plan-description">Business virtual mail box only</p>
+            <ul class="plan-features">
+              <li>Real street address</li>
+              <li>Unique suite number</li>
+              <li>Google My Business listing</li>
+              <li>Bing for Business listing</li>
+              <li>Discounted postage for mail forwarding</li>
+              <li>Registered Agent (for State compliance)</li>
+            </ul>
+            <button class="select-plan-btn" onclick="selectPlan('startup')">
+              I want this
+            </button>
+          </div>
+
+          <!-- BOSS UP Plan (Most Popular) -->
+          <div class="plan-card popular">
+            <h3 class="plan-title">BOSS UP</h3>
+            <p class="plan-description">Business Virtual Office</p>
+            <ul class="plan-features">
+              <li>Real street address</li>
+              <li>Unique suite number</li>
+              <li>Google My Business listing</li>
+              <li>Bing for Business listing</li>
+              <li>Discounted postage for mail forwarding</li>
+              <li>Registered Agent (for State compliance)</li>
+              <li>Shredding</li>
+              <li>Free scans (first 10 pages) per month</li>
+              <li>Business phone number</li>
+              <li>1 hour private office access</li>
+              <li>2 x coworking day pass</li>
+              <li>10% off all additional services</li>
+            </ul>
+            <button class="select-plan-btn" onclick="selectPlan('bossup')">
+              I want this
+            </button>
+          </div>
+
+          <!-- HIGHER UP Plan -->
+          <div class="plan-card">
+            <h3 class="plan-title">HIGHER UP</h3>
+            <p class="plan-description">Business Virtual Office (Premium)</p>
+            <ul class="plan-features">
+              <li>Real street address</li>
+              <li>Unique suite number</li>
+              <li>Google My Business listing</li>
+              <li>Bing for Business listing</li>
+              <li>Discounted postage for mail forwarding</li>
+              <li>Registered Agent (for State compliance)</li>
+              <li>Shredding</li>
+              <li>Unlimited scans</li>
+              <li>Business phone number</li>
+              <li>2 hour private office access</li>
+              <li>4 x coworking day pass</li>
+              <li>Live answering service</li>
+              <li>30% off all additional services</li>
+            </ul>
+            <button class="select-plan-btn" onclick="selectPlan('higherup')">
+              I want this
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duration Selection Page -->
+      <div id="duration-page" class="page">
+        <!-- Progress Indicator -->
+        <div class="progress-container">
+          <div class="progress-step">
+            <div class="step-circle active">01</div>
+            <div class="step-label active">Duration</div>
+          </div>
+          <div class="progress-line"></div>
+
+          <div class="progress-step">
+            <div class="step-circle inactive">02</div>
+            <div class="step-label">Details</div>
+          </div>
+          <div class="progress-line"></div>
+
+          <div class="progress-step">
+            <div class="step-circle inactive">03</div>
+            <div class="step-label">Payment</div>
+          </div>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+          <!-- Content Area -->
+          <div class="content-area">
+            <h1 class="page-heading">Pick Your Duration</h1>
+            <p class="page-description">
+              Choose from our monthly, 6-month, or yearly options to find the
+              perfect fit for your needs and budget.
+            </p>
+
+            <!-- Duration Cards -->
+            <div id="duration-cards-container">
+              <!-- Cards will be populated by JavaScript based on selected plan -->
+            </div>
+
+            <div class="nav-buttons">
+              <button
+                class="nav-btn secondary"
+                onclick="goToPage('landing-page')"
+              >
+                Back
+              </button>
+              <button
+                class="nav-btn primary"
+                onclick="goToPage('details-page')"
+                id="next-btn"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+
+          <!-- Sidebar Order Summary -->
+          <div class="sidebar">
+            <div class="sidebar-content">
+              <h2 class="sidebar-heading">Order Summary</h2>
+
+              <div class="summary-row">
+                <span class="summary-label">Location:</span>
+                <span class="summary-value">Lauderhill, FL</span>
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Plan:</span>
+                <span class="summary-value" id="selected-plan-name"
+                  >START UP</span
+                >
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Payment Frequency:</span>
+                <span class="summary-value" id="selected-frequency"
+                  >Monthly</span
+                >
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Next Billing Date:</span>
+                <span class="summary-value" id="next-billing">2025-10-15</span>
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">You pay today:</span>
+                <span class="summary-value" id="pay-today">$49</span>
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">You pay at renewal:</span>
+                <span class="summary-value" id="pay-renewal">$49</span>
+              </div>
+
+              <div id="plan-features-sidebar">
+                <!-- Features will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Details Page -->
+      <div id="details-page" class="page">
+        <div class="progress-container">
+          <div class="progress-step">
+            <div class="step-circle active">01</div>
+            <div class="step-label active">Duration</div>
+          </div>
+          <div class="progress-line"></div>
+
+          <div class="progress-step">
+            <div class="step-circle active">02</div>
+            <div class="step-label active">Details</div>
+          </div>
+          <div class="progress-line"></div>
+
+          <div class="progress-step">
+            <div class="step-circle inactive">03</div>
+            <div class="step-label">Payment</div>
+          </div>
+        </div>
+
+        <div class="main-layout">
+          <div class="content-area">
+            <h1 class="page-heading">Contact Information</h1>
+            <p class="page-description">
+              Please provide your contact details to complete your order.
+            </p>
+
+            <form id="contact-form">
+              <div class="form-section">
+                <h3>Personal Information</h3>
+                <div class="form-group">
+                  <label class="form-label">First Name *</label>
+                  <input type="text" class="form-input" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Name *</label>
+                  <input type="text" class="form-input" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email Address *</label>
+                  <input type="email" class="form-input" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone Number *</label>
+                  <input type="tel" class="form-input" required />
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>Business Information</h3>
+                <div class="form-group">
+                  <label class="form-label">Business Name</label>
+                  <input type="text" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Business Address</label>
+                  <input type="text" class="form-input" />
+                </div>
+              </div>
+            </form>
+
+            <div class="nav-buttons">
+              <button
+                class="nav-btn secondary"
+                onclick="goToPage('duration-page')"
+              >
+                Back
+              </button>
+              <button class="nav-btn primary" onclick="goToPaymentPage()">
+                Next
+              </button>
+            </div>
+          </div>
+
+          <div class="sidebar">
+            <div class="sidebar-content">
+              <h2 class="sidebar-heading">Order Summary</h2>
+
+              <div class="summary-row">
+                <span class="summary-label">Location:</span>
+                <span class="summary-value">Lauderhill, FL</span>
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Plan:</span>
+                <span class="summary-value" id="selected-plan-name-details"
+                  >START UP</span
+                >
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Payment Frequency:</span>
+                <span class="summary-value" id="selected-frequency-details"
+                  >Monthly</span
+                >
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">You pay today:</span>
+                <span class="summary-value" id="pay-today-details">$49</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Page -->
+      <div id="payment-page" class="page">
+        <div class="progress-container">
+          <div class="progress-step">
+            <div class="step-circle active">01</div>
+            <div class="step-label active">Duration</div>
+          </div>
+          <div class="progress-line"></div>
+
+          <div class="progress-step">
+            <div class="step-circle active">02</div>
+            <div class="step-label active">Details</div>
+          </div>
+          <div class="progress-line"></div>
+
+          <div class="progress-step">
+            <div class="step-circle active">03</div>
+            <div class="step-label active">Payment</div>
+          </div>
+        </div>
+
+        <div class="main-layout">
+          <div class="content-area">
+            <h1 class="page-heading">Payment Information</h1>
+            <p class="page-description">
+              Complete your order by providing payment details.
+            </p>
+
+            <form id="payment-form">
+              <div class="form-section">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="terms-agreement" required />
+                  <label for="terms-agreement"
+                    >I agree with the fees and the Terms & Conditions</label
+                  >
+                </div>
+              </div>
+            </form>
+
+            <div class="nav-buttons">
+              <button
+                class="nav-btn secondary"
+                onclick="goToPage('details-page')"
+              >
+                Back
+              </button>
+              <button
+                class="nav-btn primary"
+                onclick="processPayment()"
+                id="pay-now-btn"
+              >
+                PAY NOW
+              </button>
+            </div>
+          </div>
+
+          <div class="sidebar">
+            <div class="sidebar-content">
+              <h2 class="sidebar-heading">Order Summary</h2>
+
+              <div class="summary-row">
+                <span class="summary-label">Location:</span>
+                <span class="summary-value">Lauderhill, FL</span>
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Plan:</span>
+                <span class="summary-value" id="selected-plan-name-payment"
+                  >START UP</span
+                >
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Payment Frequency:</span>
+                <span class="summary-value" id="selected-frequency-payment"
+                  >Monthly</span
+                >
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">Next Billing Date:</span>
+                <span class="summary-value" id="next-billing-payment"
+                  >2025-10-15</span
+                >
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">You pay today:</span>
+                <span class="summary-value" id="pay-today-payment">$49</span>
+              </div>
+
+              <div class="summary-row">
+                <span class="summary-label">You pay at renewal:</span>
+                <span class="summary-value" id="pay-renewal-payment">$49</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Application state
+      let currentPlan = "startup";
+      let currentDuration = "monthly";
+      let planData = {
+        startup: {
+          name: "START UP",
+          description: "Business virtual mail box only",
+          pricing: {
+            monthly: {
+              price: 49,
+              link: "https://buy.stripe.com/00wcN72Sqe0edatcB27N60K",
+            },
+            "6month": {
+              price: 39,
+              upfront: 234,
+              link: "https://buy.stripe.com/7sY3cxgJg5tIfiBdF67N60N",
+            },
+            "12month": {
+              price: 29,
+              upfront: 348,
+              link: "https://buy.stripe.com/8x24gB64C7BQ7Q97gI7N60M",
+            },
+          },
+          features: [
+            "Real street address",
+            "Unique suite number",
+            "Google My Business listing",
+            "Bing for Business listing",
+            "Discounted postage for mail forwarding",
+            "Registered Agent (for State compliance)",
+          ],
+        },
+        bossup: {
+          name: "BOSS UP",
+          description: "Business Virtual Office",
+          pricing: {
+            monthly: {
+              price: 69,
+              link: "https://buy.stripe.com/28EdRb2Sq7BQ8Ud44w7N60O",
+            },
+            "6month": {
+              price: 59,
+              upfront: 354,
+              link: "https://buy.stripe.com/8x200l50yf4ifiB0Sk7N60P",
+            },
+            "12month": {
+              price: 49,
+              upfront: 588,
+              link: "https://buy.stripe.com/5kQ5kF78Gg8m0nHfNe7N60Q",
+            },
+          },
+          features: [
+            "Real street address",
+            "Unique suite number",
+            "Google My Business listing",
+            "Bing for Business listing",
+            "Discounted postage for mail forwarding",
+            "Registered Agent (for State compliance)",
+            "Shredding",
+            "Free scans (first 10 pages) per month",
+            "Business phone number",
+            "1 hour private office access",
+            "2 x coworking day pass",
+            "10% off all additional services",
+          ],
+        },
+        higherup: {
+          name: "HIGHER UP",
+          description: "Business Virtual Office (Premium)",
+          pricing: {
+            monthly: {
+              price: 79,
+              link: "https://buy.stripe.com/fZu7sNgJge0eeex9oQ7N60R",
+            },
+            "6month": {
+              price: 69,
+              upfront: 414,
+              link: "https://buy.stripe.com/5kQ3cx0Ki7BQ7Q90Sk7N60S",
+            },
+            "12month": {
+              price: 59,
+              upfront: 708,
+              link: "https://buy.stripe.com/8x200l9gO8FUfiB9oQ7N60T",
+            },
+          },
+          features: [
+            "Real street address",
+            "Unique suite number",
+            "Google My Business listing",
+            "Bing for Business listing",
+            "Discounted postage for mail forwarding",
+            "Registered Agent (for State compliance)",
+            "Shredding",
+            "Unlimited scans",
+            "Business phone number",
+            "2 hour private office access",
+            "4 x coworking day pass",
+            "Live answering service",
+            "30% off all additional services",
+          ],
+        },
+      };
+
+      // Helper functions
+      function formatDate(daysFromNow) {
+        const date = new Date();
+        date.setDate(date.getDate() + daysFromNow);
+        return date.toISOString().split("T")[0];
+      }
+
+      function updateOrderSummary() {
+        const plan = planData[currentPlan];
+        const pricing = plan.pricing[currentDuration];
+
+        // Update plan name
+        document
+          .querySelectorAll('[id^="selected-plan-name"]')
+          .forEach((el) => {
+            el.textContent = plan.name;
+          });
+
+        // Update frequency
+        const frequencyText = {
+          monthly: "Monthly",
+          "6month": "6 Months",
+          "12month": "12 Months",
+        };
+
+        document
+          .querySelectorAll('[id^="selected-frequency"]')
+          .forEach((el) => {
+            el.textContent = frequencyText[currentDuration];
+          });
+
+        // Update billing dates and amounts
+        const nextBillingDays = {
+          monthly: 30,
+          "6month": 180,
+          "12month": 365,
+        };
+
+        const nextBilling = formatDate(nextBillingDays[currentDuration]);
+        document.querySelectorAll('[id^="next-billing"]').forEach((el) => {
+          el.textContent = nextBilling;
+        });
+
+        // Update payment amounts
+        const payToday = pricing.upfront || pricing.price;
+        document.querySelectorAll('[id^="pay-today"]').forEach((el) => {
+          el.textContent = `${payToday}`;
+        });
+
+        document.querySelectorAll('[id^="pay-renewal"]').forEach((el) => {
+          el.textContent = `${pricing.price}`;
+        });
+
+        // Update features in sidebar
+        const featuresContainer = document.getElementById(
+          "plan-features-sidebar"
+        );
+        if (featuresContainer) {
+          featuresContainer.innerHTML = `
+                    <ul class="features-list">
+                        ${plan.features
+                          .map(
+                            (feature) => `
+                            <li class="feature-item">
+                                <div class="checkmark"></div>
+                                ${feature}
+                            </li>
+                        `
+                          )
+                          .join("")}
+                    </ul>
+                `;
+        }
+      }
+
+      function selectPlan(planType) {
+        currentPlan = planType;
+        goToPage("duration-page");
+        renderDurationCards();
+        updateOrderSummary();
+      }
+
+      function renderDurationCards() {
+        const plan = planData[currentPlan];
+        const container = document.getElementById("duration-cards-container");
+
+        container.innerHTML = `
+                <div class="duration-cards">
+                    <div class="duration-card" onclick="selectDuration('monthly')">
+                        <div class="card-title">Monthly</div>
+                        <div class="card-subtitle">Starting</div>
+                        <div class="card-price">
+                            ${plan.pricing.monthly.price}.00<span class="price-period">/Month</span>
+                        </div>
+                    </div>
+
+                    <div class="duration-card selected" onclick="selectDuration('6month')">
+                        <div class="card-title">6-month</div>
+                        <div class="card-subtitle">Starting</div>
+                        <div class="card-price">
+                            ${plan.pricing["6month"].price}.00<span class="price-period">/Month</span>
+                        </div>
+                        <div class="upfront-price">Pay ${plan.pricing["6month"].upfront} upfront</div>
+                    </div>
+
+                    <div class="duration-card" onclick="selectDuration('12month')">
+                        <div class="card-title">12-month</div>
+                        <div class="card-subtitle">Starting</div>
+                        <div class="card-price">
+                            ${plan.pricing["12month"].price}.00<span class="price-period">/Month</span>
+                        </div>
+                        <div class="upfront-price">Pay ${plan.pricing["12month"].upfront} upfront</div>
+                    </div>
+                </div>
+            `;
+
+        // Set default selection to 6-month
+        currentDuration = "6month";
+      }
+
+      function selectDuration(duration) {
+        currentDuration = duration;
+
+        // Update visual selection
+        document.querySelectorAll(".duration-card").forEach((card) => {
+          card.classList.remove("selected");
+        });
+        event.currentTarget.classList.add("selected");
+
+        updateOrderSummary();
+      }
+
+      function goToPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll(".page").forEach((page) => {
+          page.classList.remove("active");
+        });
+
+        // Show target page
+        document.getElementById(pageId).classList.add("active");
+
+        // Update order summary when navigating
+        if (pageId !== "landing-page") {
+          updateOrderSummary();
+        }
+      }
+
+      function processPayment() {
+        const termsCheckbox = document.getElementById("terms-agreement");
+
+        if (!termsCheckbox.checked) {
+          alert("Please agree to the Terms & Conditions to proceed.");
+          return;
+        }
+
+        // Get the current plan pricing and payment link
+        const plan = planData[currentPlan];
+        const pricing = plan.pricing[currentDuration];
+
+        // Calculate final amount (no notary service charge)
+        let totalAmount = pricing.upfront || pricing.price;
+
+        // In a real implementation, you would redirect to the Stripe payment link
+        if (confirm(`Proceed to payment of ${totalAmount}?`)) {
+          // Redirect to appropriate Stripe payment link
+          window.open(pricing.link, "_blank");
+        }
+      }
+
+      // Form validation
+      function validateForm(formId) {
+        const form = document.getElementById(formId);
+        const requiredFields = form.querySelectorAll("input[required]");
+
+        for (let field of requiredFields) {
+          if (!field.value.trim()) {
+            field.focus();
+            alert("Please fill in all required fields.");
+            return false;
+          }
+        }
+        return true;
+      }
+
+      // Enhanced navigation with validation
+      function goToDetailsPage() {
+        goToPage("details-page");
+      }
+
+      function goToPaymentPage() {
+        if (validateForm("contact-form")) {
+          goToPage("payment-page");
+        }
+      }
+
+      // Initialize the application
+      document.addEventListener("DOMContentLoaded", function () {
+        // Application is ready
+      });
+    </script>
+  </body>
+</html>
